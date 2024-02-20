@@ -1,6 +1,7 @@
 //import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:luminmusic/models/playlist_provider.dart';
 import 'package:luminmusic/themes/dark_theme.dart';
 import 'package:luminmusic/themes/light_theme.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +10,11 @@ import 'package:luminmusic/themes/theme_provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => PlaylistProvider()),
+      ],
       child: const MyApp(),
     ),
   );
