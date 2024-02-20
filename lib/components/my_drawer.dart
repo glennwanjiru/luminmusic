@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:luminmusic/pages/settings_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -18,20 +19,29 @@ class MyDrawer extends StatelessWidget {
         )),
         //home title
         Padding(
-          padding: EdgeInsets.only(left: 25.0, top: 25),
+          padding: const EdgeInsets.only(left: 25.0, top: 25),
           child: ListTile(
-            title: Text("H O M E"),
-            leading: Icon(Icons.home),
-            onTap: () {},
+            title: const Text("H O M E"),
+            leading: const Icon(Icons.home),
+            onTap: () => Navigator.pop(context),
           ),
         ),
         //settings title
         Padding(
-          padding: EdgeInsets.only(left: 25.0, top: 25),
+          padding: const EdgeInsets.only(left: 25.0, top: 25),
           child: ListTile(
-            title: Text("S E T T I N G S"),
-            leading: Icon(Icons.settings),
-            onTap: () {},
+            title: const Text("S E T T I N G S"),
+            leading: const Icon(Icons.settings),
+            onTap: () {
+              Navigator.pop(context);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SettingsPage(),
+                ),
+              );
+            },
           ),
         ),
       ]),
