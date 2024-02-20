@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:luminmusic/components/my_drawer.dart';
 import 'package:luminmusic/models/playlist_provider.dart';
 import 'package:luminmusic/models/song.dart';
+import 'package:luminmusic/pages/song_page.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
