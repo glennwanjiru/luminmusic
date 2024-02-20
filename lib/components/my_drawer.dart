@@ -24,6 +24,7 @@ class MyDrawer extends StatelessWidget {
             title: const Text("H O M E"),
             leading: const Icon(Icons.home),
             onTap: () => Navigator.pop(context),
+            //textColor: Theme.of(context).colorScheme.inversePrimary,
           ),
         ),
         //settings title
