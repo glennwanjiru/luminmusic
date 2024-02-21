@@ -36,10 +36,43 @@ class SongPage extends StatelessWidget {
                       icon: Icon(Icons.menu),
                     ),
                   ],
-                )
+                ),
 
                 //album artwork
-                //NeuBox(child: child)
+                NeuBox(
+                  child: Column(
+                    children: [
+                      //image
+                      ClipRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset("lib/models/assets/images/test.jpg"),
+                      ),
+                      //song and artist
+                      const Padding(
+                        padding: EdgeInsets.all(15.0),
+                        child: Row(
+                          children: [
+                            //song and artist name
+                            Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Commas",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  Text("Ayra")
+                                ]),
+
+                            //heart icon
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
 
                 //song duration progress
 
