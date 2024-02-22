@@ -28,13 +28,13 @@ class SongPage extends StatelessWidget {
                     ),
 
                     //title
-                    Text("P L A Y L I S T"),
+                    const Text("P L A Y L I S T"),
 
                     //menu button
 
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(Icons.menu),
+                      icon: const Icon(Icons.menu),
                     ),
                   ],
                 ),
@@ -89,9 +89,9 @@ class SongPage extends StatelessWidget {
                 //song duration progress
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: const Row(
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           //start time
@@ -136,7 +136,7 @@ class SongPage extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {},
-                        child: NeuBox(
+                        child: const NeuBox(
                           child: Icon(Icons.skip_previous),
                         ),
                       ),
@@ -151,7 +151,7 @@ class SongPage extends StatelessWidget {
                       flex: 2,
                       child: GestureDetector(
                         onTap: () {},
-                        child: NeuBox(
+                        child: const NeuBox(
                           child: Icon(Icons.play_arrow),
                         ),
                       ),
@@ -164,7 +164,7 @@ class SongPage extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {},
-                        child: NeuBox(
+                        child: const NeuBox(
                           child: Icon(Icons.skip_next),
                         ),
                       ),
