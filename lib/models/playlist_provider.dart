@@ -3,16 +3,30 @@ import 'package:luminmusic/models/song.dart';
 
 class PlaylistProvider extends ChangeNotifier {
   //playlist of songs
-  final List<Song> _playlist = [
-    //song 1
-    Song(
-        songName: "Commas",
-        artistName: "Ayra Starr",
-        albumArtImagePath: "lib/models/assets/images/test.jpg",
-        audioPath:
-            "lib/models/assets/audio/Ayra Starr - Commas (Lyric Video)(MP3_160K).mp3"),
-  ];
+  final List<Song> _playlist = []
+    
+ 
   int? _currentSongIndex;
+
+
+
+  /*
+
+  AUDIO PLAYER
+  
+  */
+  //audio player
+
+  //duration
+
+  //constructor
+
+  //initially not playing
+
+  //play the song
+
+  //
+
 
   /*
   GETTERS
