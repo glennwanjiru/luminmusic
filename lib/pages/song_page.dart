@@ -103,7 +103,7 @@ class SongPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             //start time
-                            Text("0.:"),
+                            Text("0:"),
 
                             //shuffle icon
 
@@ -124,12 +124,17 @@ class SongPage extends StatelessWidget {
                                 enabledThumbRadius: 0)),
                         child: Slider(
                           min: 0,
-                          max: 100,
-                          value: 50,
+                          max: value.totalDuration.inSeconds.toDouble(),
+                          value: value.currentDuration.inSeconds.toDouble(),
                           activeColor: Colors.amber,
-                          onChanged: (value) {},
+                          onChanged: (double double) {
+                            //when the user is draggging the slide
+                          },
+                          onChangeEnd: (double double) {
+                            value.seek(Duration(seconds: double.toInt()));
+                          },
                         ),
-                      )
+                      ),
                     ],
                   ),
                   const SizedBox(
@@ -143,7 +148,7 @@ class SongPage extends StatelessWidget {
 
                       Expanded(
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: value.playPreviousSong,
                           child: const NeuBox(
                             child: Icon(Icons.skip_previous),
                           ),
@@ -158,9 +163,11 @@ class SongPage extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: GestureDetector(
-                          onTap: () {},
-                          child: const NeuBox(
-                            child: Icon(Icons.play_arrow),
+                          onTap: value.pauseOrResume,
+                          child: NeuBox(
+                            child: Icon(value.isPlaying
+                                ? Icons.pause
+                                : Icons.play_arrow),
                           ),
                         ),
                       ),
@@ -171,7 +178,7 @@ class SongPage extends StatelessWidget {
                       //skip forward
                       Expanded(
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: value.playNextSong,
                           child: const NeuBox(
                             child: Icon(Icons.skip_next),
                           ),
