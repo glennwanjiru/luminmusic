@@ -46,11 +46,13 @@ class PlaylistProvider extends ChangeNotifier {
 
   //play the song
   void play() async {
-    final String path = _playlist[_currentSongIndex!].audioPath;
-    await _audioPlayer.stop(); //stop current song
-    await _audioPlayer.play(AssetSource(path)); //play new song
-    _isPlaying = true;
-    notifyListeners();
+    if (_currentSongIndex != null) {
+      final String path = _playlist[_currentSongIndex!].audioPath;
+      await _audioPlayer.stop(); //stop current song
+      await _audioPlayer.play(AssetSource(path)); //play new song
+      _isPlaying = true;
+      notifyListeners();
+    }
   }
 
   //pause current song
