@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
     //navigate to song page
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => SongPage()),
+      MaterialPageRoute(builder: (context) => const SongPage()),
     );
   }
 
@@ -39,8 +39,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(title: Text("P L A Y L I S T")),
-      drawer: MyDrawer(),
+      appBar: AppBar(title: const Text("P L A Y L I S T")),
+      drawer: const MyDrawer(),
       body: Consumer<PlaylistProvider>(
         builder: (context, value, child) {
           final List<Song> playlist = value.playlist;

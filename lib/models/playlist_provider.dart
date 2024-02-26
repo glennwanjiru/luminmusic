@@ -19,7 +19,7 @@ class PlaylistProvider extends ChangeNotifier {
         albumArtImagePath:
             "lib/models/assets/images/pexels-ashutosh-sonwani-1762578.jpg",
         audioPath:
-            "lib/models/assets/audio/Busy Signal - Party Nice (Official Video)(MP3_160K).mp3")
+            "lib/models/assets/audio/Busy Signal - Party Nice (Official Video)(MP3_160K).mp3"),
   ];
 
   int? _currentSongIndex;
@@ -30,7 +30,7 @@ class PlaylistProvider extends ChangeNotifier {
   
   */
   //audio player
-  final AudioPlayer _audioPlayer = new AudioPlayer();
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   //duration
   Duration _currentDuration = Duration.zero;
@@ -101,8 +101,10 @@ class PlaylistProvider extends ChangeNotifier {
   void playPreviousSong() async {
     //if more than 2 seconds have passed, restart the song
     if (_currentDuration.inSeconds > 2) {
+      seek(Duration.zero);
     }
     //if its within the first 2 seconds go  to the previous song
+
     else {
       if (_currentSongIndex! > 0) {
         currentSongIndex = _currentSongIndex! - 1;
@@ -123,7 +125,7 @@ class PlaylistProvider extends ChangeNotifier {
     //listen for current duration
     _audioPlayer.onPositionChanged.listen((newPosition) {
       _currentDuration = newPosition;
-      notifyListeners();
+      notifyListeners(); // Important! Trigger UI update
     });
 
     //listen for song completion

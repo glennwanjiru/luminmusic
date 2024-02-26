@@ -4,19 +4,27 @@ import 'package:luminmusic/models/playlist_provider.dart';
 import 'package:provider/provider.dart';
 
 class SongPage extends StatelessWidget {
-  const SongPage({super.key});
+  const SongPage({Key? key});
+
+  // Convert duration into minisec
+  String formatTime(Duration duration) {
+    String twoDigitSeconds =
+        duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    String formattedTime = "${duration.inMinutes} : $twoDigitSeconds";
+    return formattedTime;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<PlaylistProvider>(
       builder: (context, value, child) {
-        //get playlist
+        // Get playlist
         final playlist = value.playlist;
 
-        //get current song index
+        // Get current song index
         final currentSong = playlist[value.currentSongIndex ?? 0];
 
-        //return Scaffold UI
+        // Return Scaffold UI
         return Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
           body: SafeArea(
@@ -25,21 +33,20 @@ class SongPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //appBar
+                  // AppBar
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      //backbutton
+                      // Back button
                       IconButton(
                         onPressed: () => Navigator.pop(context),
-                        icon: Icon(Icons.arrow_back),
+                        icon: const Icon(Icons.arrow_back),
                       ),
 
-                      //title
+                      // Title
                       const Text("P L A Y L I S T"),
 
-                      //menu button
-
+                      // Menu button
                       IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.menu),
@@ -50,22 +57,22 @@ class SongPage extends StatelessWidget {
                     height: 10,
                   ),
 
-                  //album artwork
+                  // Album artwork
                   NeuBox(
                     child: Column(
                       children: [
-                        //image
+                        // Image
                         ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Image.asset(currentSong.albumArtImagePath),
                         ),
-                        //song and artist
+                        // Song and artist
                         Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              //song and artist name
+                              // Song and artist name
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -80,7 +87,7 @@ class SongPage extends StatelessWidget {
                                 ],
                               ),
 
-                              //heart icon
+                              // Heart icon
                               const Icon(
                                 Icons.favorite,
                                 color: Colors.cyan,
@@ -94,43 +101,46 @@ class SongPage extends StatelessWidget {
 
                   const SizedBox(height: 25),
 
-                  //song duration progress
+                  // Song duration progress
                   Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 25.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            //start time
-                            Text("0:"),
+                            // Start time
+                            Text(formatTime(value.currentDuration)),
 
-                            //shuffle icon
+                            // Shuffle icon
+                            const Icon(Icons.shuffle),
 
-                            Icon(Icons.shuffle),
+                            // Repeat icon
+                            const Icon(Icons.repeat),
 
-                            //repeat icon
-                            Icon(Icons.repeat),
-
-                            //end time
-                            Text("3:00"),
+                            // End time
+                            Text(formatTime(value.totalDuration)),
                           ],
                         ),
                       ),
-                      //song duration progress
+                      // Song duration progress
                       SliderTheme(
                         data: SliderTheme.of(context).copyWith(
-                            thumbShape: const RoundSliderThumbShape(
-                                enabledThumbRadius: 0)),
+                          thumbShape: const RoundSliderThumbShape(
+                            enabledThumbRadius: 5,
+                          ),
+                        ),
                         child: Slider(
                           min: 0,
                           max: value.totalDuration.inSeconds.toDouble(),
                           value: value.currentDuration.inSeconds.toDouble(),
                           activeColor: Colors.amber,
                           onChanged: (double newValue) {
-                            //when the user is draggging the slide
+                            // When the user is dragging the slide
+                            // This is where you can update the UI if needed
                           },
                           onChangeEnd: (double newValue) {
+                            // Sliding finished
                             value.seek(Duration(seconds: newValue.toInt()));
                           },
                         ),
@@ -141,11 +151,10 @@ class SongPage extends StatelessWidget {
                     height: 10,
                   ),
 
-                  //playback controls
+                  // Playback controls
                   Row(
                     children: [
-                      //skip previous
-
+                      // Skip previous
                       Expanded(
                         child: GestureDetector(
                           onTap: value.playPreviousSong,
@@ -158,8 +167,7 @@ class SongPage extends StatelessWidget {
                         height: 20,
                       ),
 
-                      //play pause
-
+                      // Play pause
                       Expanded(
                         flex: 2,
                         child: GestureDetector(
@@ -175,7 +183,7 @@ class SongPage extends StatelessWidget {
                         height: 20,
                       ),
 
-                      //skip forward
+                      // Skip forward
                       Expanded(
                         child: GestureDetector(
                           onTap: value.playNextSong,
