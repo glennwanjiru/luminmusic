@@ -127,11 +127,11 @@ class SongPage extends StatelessWidget {
                           max: value.totalDuration.inSeconds.toDouble(),
                           value: value.currentDuration.inSeconds.toDouble(),
                           activeColor: Colors.amber,
-                          onChanged: (double double) {
+                          onChanged: (double newValue) {
                             //when the user is draggging the slide
                           },
-                          onChangeEnd: (double double) {
-                            value.seek(Duration(seconds: double.toInt()));
+                          onChangeEnd: (double newValue) {
+                            value.seek(Duration(seconds: newValue.toInt()));
                           },
                         ),
                       ),
